@@ -1,0 +1,18 @@
+id:
+  providerName: admin
+  apiName: EmployeeInfo
+  version: 1.0.0
+description: This is a sample server  for employees
+type: HTTP
+context: /api/v1/1.0.0
+contextTemplate: /api/v1/{version}
+tags:
+- employee
+availableTiers:
+- name: Unlimited
+status: CREATED
+visibility: public
+transports: http,https
+productionUrl: http://localhost:8080
+sandboxUrl: http://localhost:8081
+enableStore: true

@@ -1,0 +1,151 @@
+basePath: /api/v1/
+definitions:
+  Employee:
+    properties:
+      age:
+        example: "23"
+        type: integer
+      name:
+        example: Test 1
+        type: string
+      salary:
+        example: "123"
+        type: integer
+    type: object
+host: dummy.restapiexample.com
+info:
+  contact:
+    email: apiteam@swagger.io
+  description: This is a sample server  for employees
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://dummy.restapiexample.com/
+  title: Employee Info
+  version: 1.0.0
+paths:
+  /create:
+    post:
+      description: ""
+      operationId: addEmployee
+      parameters:
+      - description: Employee object needed
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/Employee'
+      produces:
+      - application/json
+      - application/xml
+      responses:
+        "405":
+          description: Invalid Input
+      summary: Add new Employee
+      tags:
+      - employee
+  /delete/{id}:
+    delete:
+      description: ""
+      operationId: delete Employee
+      parameters:
+      - description: id of the order deleted
+        format: int64
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      - application/xml
+      responses:
+        "200":
+          description: success
+        "400":
+          description: Invalid ID number
+        "404":
+          description: Employee not found
+      summary: Delete Employee by id
+      tags:
+      - employee
+  /employee/{id}:
+    get:
+      description: ""
+      operationId: view certain employees
+      parameters:
+      - description: certain the employees
+        format: int64
+        in: path
+        items:
+          default: "1"
+          enum:
+          - "1"
+          - "2"
+          - "3"
+          type: string
+        name: id
+        required: true
+        type: array
+      produces:
+      - application/json
+      - application/xml
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            items:
+              $ref: '#/definitions/Employee'
+            type: array
+      summary: View certain employeees
+      tags:
+      - employee
+  /employees:
+    get:
+      description: Return a map of all employees
+      operationId: getEmployees
+      parameters: []
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            additionalProperties:
+              format: '%b'
+              type: string
+            type: object
+      summary: view all Employees
+      tags:
+      - employee
+  /update/{id}:
+    put:
+      description: ' '
+      operationId: Updated Employee
+      parameters:
+      - description: id that needs to be updated
+        format: int64
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: updated employee object
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/Employee'
+      produces:
+      - application/json
+      - application/xml
+      responses:
+        "200":
+          description: Success
+      summary: Update Employee
+      tags:
+      - employee
+schemes:
+- https
+- http
+swagger: "2.0"
+tags:
+- name: employee
